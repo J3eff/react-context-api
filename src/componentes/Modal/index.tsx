@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { forwardRef, useRef } from "react";
 import {
   ButtonGroup,
   CloseButton,
@@ -11,45 +11,22 @@ import Botao from "../Botao";
 interface ModalProps {
   icon: React.ReactNode;
   titulo: string;
-  aoFechar: () => void;
   children: React.ReactNode;
-  estaAberta: boolean;
   aoClicar: () => void;
 }
 
-const Modal = ({
+export interface ModalHandle {
+  open: () => void;
+  close: () => void;
+}
+
+const Modal = forwardRef<ModalHandle, ModalProps>(({
   icon,
   titulo,
-  aoFechar,
   children,
-  estaAberta,
   aoClicar,
-}: ModalProps) => {
+}, ref) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
-
-  useEffect(() => {
-    const dialogNode = dialogRef.current;
-
-    if (dialogNode) {
-      if (estaAberta) {
-        dialogNode.showModal();
-      } else {
-        dialogNode.close();
-      }
-    }
-
-    const handleClose = () => aoFechar();
-
-    if (dialogNode) {
-      dialogNode.addEventListener("close", handleClose);
-    }
-
-    return () => {
-      if (dialogNode) {
-        dialogNode.removeEventListener("close", handleClose);
-      }
-    };
-  }, [estaAberta, aoFechar]);
 
   return (
     <ModalOverlay>
@@ -59,11 +36,11 @@ const Modal = ({
             {icon}
             {titulo}
           </div>
-          <CloseButton onClick={aoFechar}>x</CloseButton>
+          <CloseButton >x</CloseButton>
         </ModalHeader>
         {children}
         <ButtonGroup>
-          <Botao $variante="secundario" onClick={aoFechar}>
+          <Botao $variante="secundario">
             Cancelar
           </Botao>
           <Botao $variante="primario" onClick={aoClicar}>
@@ -73,6 +50,6 @@ const Modal = ({
       </ModalContainer>
     </ModalOverlay>
   );
-};
+});
 
 export default Modal;
