@@ -1,11 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
-import {
-  ButtonGroup,
-  CloseButton,
-  ModalContainer,
-  ModalHeader,
-  ModalOverlay,
-} from "./style";
+import { ButtonGroup, CloseButton, ModalContainer, ModalHeader } from "./style";
 import Botao from "../Botao";
 
 interface ModalProps {
@@ -41,32 +35,30 @@ const Modal = forwardRef<ModalHandle, ModalProps>(
     };
 
     return (
-      <ModalOverlay>
-        <ModalContainer ref={dialogRef} onClick={aoClicarForaModal}>
-          <ModalHeader>
-            <div>
-              {icon}
-              {titulo}
-            </div>
-            <CloseButton onClick={fechaModal}>x</CloseButton>
-          </ModalHeader>
-          {children}
-          <ButtonGroup>
-            <Botao $variante="secundario" onClick={fechaModal}>
-              Cancelar
-            </Botao>
-            <Botao
-              $variante="primario"
-              onClick={() => {
-                aoClicar();
-                fechaModal();
-              }}
-            >
-              Adicionar
-            </Botao>
-          </ButtonGroup>
-        </ModalContainer>
-      </ModalOverlay>
+      <ModalContainer ref={dialogRef} onClick={aoClicarForaModal}>
+        <ModalHeader>
+          <div>
+            {icon}
+            {titulo}
+          </div>
+          <CloseButton onClick={fechaModal}>x</CloseButton>
+        </ModalHeader>
+        {children}
+        <ButtonGroup>
+          <Botao $variante="secundario" onClick={fechaModal}>
+            Cancelar
+          </Botao>
+          <Botao
+            $variante="primario"
+            onClick={() => {
+              aoClicar();
+              fechaModal();
+            }}
+          >
+            Adicionar
+          </Botao>
+        </ButtonGroup>
+      </ModalContainer>
     );
   }
 );
