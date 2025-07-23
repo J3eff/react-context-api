@@ -10,7 +10,7 @@ export const obterUsuario = async (): Promise<IUsuario[]> => {
   return data;
 };
 
-export const criaUsuario = async (
+export const criarUsuario = async (
   usuario: Omit<IUsuario, "id">
 ): Promise<IUsuario> => {
   const { data } = await api.post<IUsuario>("/usuarios", usuario);
