@@ -11,5 +11,14 @@
       "renda": "10000"
     }
   ],
-  "transacoes": []
+  "transacoes": [
+    {
+      "id": "875f",
+      "nome": "Livro",
+      "valor": "70",
+      "tipo": "despesa",
+      "categoria": "Estudos",
+      "data": "2025-06-24"
+    }
+  ]
 }
