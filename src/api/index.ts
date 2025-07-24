@@ -22,7 +22,7 @@ export const obterTransacoes = async (): Promise<ITransacoes[]> => {
   return data;
 };
 
-export const criaTransacao = async (
+export const criarTransacao = async (
   transacao: Omit<ITransacoes, "id">
 ): Promise<ITransacoes> => {
   const { data } = await api.post<ITransacoes>("/transacoes", transacao);
