@@ -19,6 +19,14 @@
       "tipo": "despesa",
       "categoria": "Estudos",
       "data": "2025-06-24"
+    },
+    {
+      "id": "ea12",
+      "nome": "Pix",
+      "valor": "100",
+      "tipo": "receita",
+      "categoria": "Pagamentos",
+      "data": "2025-07-24"
     }
   ]
 }
