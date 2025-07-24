@@ -14,9 +14,10 @@ import CampoTexto from "../../componentes/CampoTexto/index.js";
 import Fieldset from "../../componentes/Fieldset/index.js";
 import Label from "../../componentes/Label/index.js";
 import { IUsuario } from "../../types/index.ts";
-import { criarUsuario } from "../../api/index.js";
+import { useAppContext } from "../../context/AppContext.tsx";
 
 const Cadastro = () => {
+  const { criaUsuario } = useAppContext();
   const [form, setForm] = useState<Omit<IUsuario, "id">>({
     nome: "",
     renda: 0,
@@ -26,12 +27,12 @@ const Cadastro = () => {
     setForm((prev) => ({ ...prev, [campo]: valor }));
   };
 
-  const navigate = useNavigate();
+  const navigate = useNavigate();    
 
   const aoSubmeterFormulario = async (evento: React.FormEvent) => {
     evento.preventDefault();
     try {
-      const novoUsuario = await criarUsuario(form);
+      const novoUsuario = await criaUsuario(form);
       console.log("Usuário criado com sucesso:", novoUsuario);
     } catch (error) {
       console.error("Erro ao submeter o formulário:", error);
