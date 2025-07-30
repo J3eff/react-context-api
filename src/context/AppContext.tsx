@@ -10,9 +10,13 @@ import {
 
 interface AppContextType {
   usuario: IUsuario | null;
-  criaUsuario: (usuario: Omit<IUsuario, "id" | "orcamentoDiario">) => Promise<void>;
+  criaUsuario: (
+    usuario: Omit<IUsuario, "id" | "orcamentoDiario">
+  ) => Promise<void>;
   transacoes: ITransacoes[];
-  criaTransacao: (novaTransacao: Omit<ITransacoes, "id">) => Promise<void>;
+  criaTransacao: (
+    novaTransacao: Omit<ITransacoes, "id" | "userId">
+  ) => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -39,7 +43,9 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     carregaDadosUsuario();
   });
 
-  const criaUsuario = async (usuario: Omit<IUsuario, "id" | "orcamentoDiario">) => {
+  const criaUsuario = async (
+    usuario: Omit<IUsuario, "id" | "orcamentoDiario">
+  ) => {
     try {
       const novoUsuario = await criarUsuario(usuario);
       setUsuario(novoUsuario);
@@ -48,10 +54,21 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const criaTransacao = async (novaTransacao: Omit<ITransacoes, "id">) => {
+  const criaTransacao = async (
+    novaTransacao: Omit<ITransacoes, "id" | "userId">
+  ) => {
     try {
-      const transacaoCriada = await criarTransacao(novaTransacao);
-      setTrasacoes((prev) => [...prev, transacaoCriada]);
+      if (!usuario) throw new Error("Usuário não está definido");
+
+      const { transacao, novoOrcamentoDiario } = await criarTransacao(
+        novaTransacao,
+        usuario
+      );
+      
+      // Atualiza o estado com a nova transação e o novo orçamento diário
+      setTrasacoes((prev) => [...prev, transacao]);
+      setUsuario((prev) => prev ? { ...prev, orcamentoDiario: novoOrcamentoDiario } : null);
+
     } catch (error) {
       console.error("Erro ao criar transação:", error);
     }
