@@ -1,32 +1,11 @@
 {
   "usuarios": [
     {
-      "id": "5cab",
+      "id": "4cd4",
       "nome": "Jefferson",
-      "renda": "10730"
-    },
-    {
-      "id": "fb8c",
-      "nome": "Jefferson",
-      "renda": "10000"
+      "renda": "10000",
+      "orcamentoDiario": 333.3333333333333
     }
   ],
-  "transacoes": [
-    {
-      "id": "875f",
-      "nome": "Livro",
-      "valor": "70",
-      "tipo": "despesa",
-      "categoria": "Estudos",
-      "data": "2025-06-24"
-    },
-    {
-      "id": "ea12",
-      "nome": "Pix",
-      "valor": "100",
-      "tipo": "receita",
-      "categoria": "Pagamentos",
-      "data": "2025-07-24"
-    }
-  ]
+  "transacoes": []
 }
