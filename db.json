@@ -4,7 +4,7 @@
       "id": "4cd4",
       "nome": "Jefferson",
       "renda": "10000",
-      "orcamentoDiario": 333.3333333333333
+      "orcamentoDiario": 323.3333333333333
     }
   ],
   "transacoes": [
@@ -24,6 +24,15 @@
       "tipo": "receita",
       "categoria": "Pagamentos",
       "data": "2025-07-30",
+      "userId": "4cd4"
+    },
+    {
+      "id": "d919",
+      "nome": "Pirulito",
+      "valor": 10,
+      "tipo": "despesa",
+      "categoria": "Alimentação",
+      "data": "2025-07-29",
       "userId": "4cd4"
     }
   ]
